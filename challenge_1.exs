@@ -16,57 +16,33 @@ defmodule Challenge_1 do
   """
 
   @doc """
-
   Función para validar si la serie generada por el valor ingresado
   es divisible por 3.
-
-  Parametros:
-    n: número para generar la serie
-
-  Retorna:
-    1: Si la serie generada es divisible por 3
-    0: Si la serie generada no es divisible por 3
-
   """
+  @spec is_divisible_by_3(n :: integer()) :: integer()
   def is_divisible_by_3(n) do
     mod = rem(n, 3)
-    if mod == 0 or mod == 2 do
-      1
-    else
-      0
+    case mod do
+      0 -> 1
+      2 -> 1
+      _ -> 0
     end
   end
 
   @doc """
-
   Función para encontrar la cantidad de series generadas por cada valor que
   son divisibles por 3 entre un rango desde a hasta b.
-
-  Parametros:
-    a: valor inferior del rango
-    b: valor superior del rango
-
   """
-  def count_divible_by_3(a, b) when a <= b do
-    is_divisible_by_3(a) + count_divible_by_3(a + 1, b)
+  @spec count_divisible_by_3(a :: integer(), b :: integer()) :: integer()
+  def count_divisible_by_3(a, b) when a <= b do
+    is_divisible_by_3(a) + count_divisible_by_3(a + 1, b)
   end
 
-  def count_divible_by_3(_, _) do 0 end
+  def count_divisible_by_3(_, _), do: 0
 
   @doc """
-
   Función para ejecutar una interfaz en la consola, para
   comprobar algunos casos de prueba rápidos
-
-  Ejemplo:
-    2
-    1 4
-    4 5
-
-  Resultado:
-    Case 1: 2
-    Case 2: 1
-
   """
   def test_console() do
     {cases, _} = IO.gets("") |> Integer.parse
